@@ -5,6 +5,8 @@ title: "About"
 
 Daily False Facts is a satirical website created by Thomas, aka [parsehex](https://parsehex.github.io/). It was originally created around 2012 and ran for 3 or 4 years before going offline, restarted once again in the year 2025.
 
+You can [**view the entire source code for Daily False Facts on GitHub**](https://github.com/parsehex/dailyfalsefacts).
+
 [Questions and Answers](#q--a)
 
 [History](#history-of-daily-false-facts)
@@ -70,3 +72,6 @@ I thought a Fakenewsletter sounded pretty funny. It's just a weekly round-up of 
 I feel like this one's pretty obvious, but I want to be thoughtful about whatever I use it for.
 
 - AI World of False Facts: A sub-site that's made up entirely of _AI generated_ false facts based on your input. At last, you'l be able to get on-demand false information whenever you want it.
+- AI Videos: It sounds like it could be funny to make a AI-generated video based on a false fact, or maybe a group of them.
+
+In general, I like and appreciate what AI makes possible when combined with some additional effort. AI by itself and on its own is boring to me.

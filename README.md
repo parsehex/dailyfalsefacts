@@ -1,16 +1,18 @@
 # 🚫📊🚫 Daily False Facts
 
-Daily False Facts is a joke website that I originally made c. 2012 and have now rebuilt in 2025. It's built with [Astro](https://astro.build/) on top of the [AstroPaper](https://astro-paper.pages.dev) theme by [Sat Naing](https://github.com/satnaing).
+Daily False Facts is a joke website that I originally made c. 2012 and have now rebuilt in 2025. It's built with [Astro][astro] on top of the [AstroPaper][astropaper] theme by [Sat Naing][satnaing].
+
+<https://dailyfalsefacts.com/>
 
 ![screenshot of Daily False Facts](dailyfalsefacts-screenshot.png)
 
 ## Tech Stack
 
-- Astro
-- React, TypeScript
-- Tailwind
-- [satori](https://github.com/vercel/satori) to generate images for false facts
-- Deployed on Cloudflare
+- [Astro][astro]
+- [React][react], [TypeScript][typescript]
+- [TailwindCSS][tailwind]
+- Vercel's [satori][satori] to generate images for false facts
+- Deployed using [Cloudflare Pages][cf-pages]
 
 ## Files of Interest
 
@@ -25,3 +27,12 @@ Licensed under the MIT License, Copyright © 2025
 ---
 
 Made with LIES by [parsehex](https://parsehex.github.io/) and fellow enthusiasts of false information over the years.
+
+[astro]: https://astro.build/
+[astropaper]: https://astro-paper.pages.dev
+[satnaing]: https://github.com/satnaing
+[react]: https://react.dev/
+[typescript]: https://www.typescriptlang.org/
+[tailwind]: https://tailwindcss.com/
+[satori]: https://github.com/vercel/satori
+[cf-pages]: https://pages.cloudflare.com/
