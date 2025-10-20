@@ -1,0 +1,45 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import { navigate } from 'astro:transitions/client';
+---
+
+<Layout>
+  <Header />
+  <main id="main-content" data-layout="index">
+    <section id="hero" class="pb-2">
+      <h2 class="my-4 inline-block text-xl font-bold sm:mt-4 sm:text-xl">
+        Taking you to a random post...
+      </h2>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<script>
+  import { navigate } from "astro:transitions/client";
+  
+  document.addEventListener("astro:page-load", async () => {
+    try {
+      const response = await fetch("/api/random-post-paths.json");
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const postPaths = await response.json();
+
+      if (postPaths.length > 0) {
+        const randomIndex = Math.floor(Math.random() * postPaths.length);
+        const randomPath = postPaths[randomIndex];
+        setTimeout(() => {
+          navigate(randomPath);
+        }, 2500);
+      } else {
+        window.location.href = "/404";
+      }
+    } catch (error) {
+      console.error("Failed to fetch random post paths:", error);
+      window.location.href = "/404";
+    }
+  });
+</script>

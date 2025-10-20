@@ -1,7 +1,20 @@
 import satori from "satori";
-// import { html } from "satori-html";
+import { html } from "satori-html";
 import { SITE } from "@/config";
 import loadGoogleFonts from "../loadGoogleFont";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+
+import fs from "fs";
+import path from "path";
+
+const logoPath = path.resolve("./public/logo-150px.png");
+const logoBase64 = fs.readFileSync(logoPath, { encoding: "base64" });
+const logoDataUri = `data:image/png;base64,${logoBase64}`;
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 // const markup = html`<div
 //       style={{
@@ -94,6 +107,20 @@ import loadGoogleFonts from "../loadGoogleFont";
 //     </div>`;
 
 export default async post => {
+  const extractListItems = (htmlContent) => {
+    const regex = /<li>(.*?)<\/li>/g;
+    let match;
+    const items = [];
+    while ((match = regex.exec(htmlContent)) !== null) {
+      items.push(match[1]);
+    }
+    return items.slice(0, 4); // Get up to 4 items
+  };
+  const items = extractListItems(post.rendered.html);
+  
+  const datetime = dayjs(post.data.pubDatetime).tz(SITE.timezone);
+  const date = datetime.format("D MMM, YYYY");
+  
   return satori(
     {
       type: "div",
@@ -155,12 +182,63 @@ export default async post => {
                       type: "p",
                       props: {
                         style: {
-                          fontSize: 72,
+                          fontSize: 64,
                           fontWeight: "bold",
                           maxHeight: "84%",
                           overflow: "hidden",
+                          display: 'flex',
+                          alignItems: 'center',
                         },
-                        children: post.data.title,
+                        children: [
+                          {
+                            type: 'img',
+                            props: {
+                              src: logoDataUri,
+                              style: {
+                                marginRight: '0.25em',
+                                maxWidth: '1em',
+                                maxHeight: '1em',
+                              }
+                            }
+                          },
+                          post.data.title,
+                          {
+                            type: "span",
+                            props: {
+                              style: { 
+                                overflow: "hidden", 
+                                fontWeight: "bold",
+                                fontSize: '1.5rem',
+                                marginLeft: '1.5em',
+                                color: 'gray',
+                              },
+                              children: date,
+                            },
+                          },
+                        ],
+                      },
+                    },
+                    {
+                      type: "div",
+                      props: {
+                        style: {
+                          fontSize: 28,
+                          maxHeight: "65%",
+                          overflow: "hidden",
+                          display: 'flex',
+                          flexDirection: 'column',
+                          justifyItems: 'start',
+                          justifyContent: 'flex-start',
+                          alignItems: 'flex-start',
+                          lineHeight: '1',
+                        },
+                        children: items.map((i) => ({
+                          type: 'p',
+                          props: {
+                            children: '- ' + i,
+                            style: {marginTop:1}
+                          },
+                        })),
                       },
                     },
                     {
@@ -170,6 +248,7 @@ export default async post => {
                           display: "flex",
                           justifyContent: "space-between",
                           width: "100%",
+                          marginTop: "8px",
                           marginBottom: "8px",
                           fontSize: 28,
                         },
@@ -222,7 +301,8 @@ export default async post => {
       height: 630,
       embedFont: true,
       fonts: await loadGoogleFonts(
-        post.data.title + post.data.author + SITE.title + "by"
+        // get only used characters:
+        post.data.title + post.data.author + SITE.title + "by" + items.join('') + '-' + date
       ),
     }
   );

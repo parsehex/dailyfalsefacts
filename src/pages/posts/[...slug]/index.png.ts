@@ -4,6 +4,8 @@ import { getPath } from "@/utils/getPath";
 import { generateOgImageForPost } from "@/utils/generateOgImages";
 import { SITE } from "@/config";
 
+// export const prerender = false;
+
 export async function getStaticPaths() {
   if (!SITE.dynamicOgImage) {
     return [];
@@ -29,6 +31,9 @@ export const GET: APIRoute = async ({ props }) => {
 
   const buffer = await generateOgImageForPost(props as CollectionEntry<"blog">);
   return new Response(new Uint8Array(buffer), {
-    headers: { "Content-Type": "image/png" },
+    headers: {
+      "Content-Type": "image/png",
+      "Cache-Control": "public, max-age=43200",
+    },
   });
 };

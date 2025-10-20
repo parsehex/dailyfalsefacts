@@ -84,7 +84,9 @@ export default async () => {
                           {
                             type: "p",
                             props: {
-                              style: { fontSize: 28 },
+                              style: { 
+                                fontSize: 28,
+                              },
                               children: SITE.desc,
                             },
                           },

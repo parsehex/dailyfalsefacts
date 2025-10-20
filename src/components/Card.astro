@@ -1,36 +1,39 @@
 ---
-import { slugifyStr } from "@/utils/slugify";
-import type { CollectionEntry } from "astro:content";
-import { getPath } from "@/utils/getPath";
+import { render, type CollectionEntry } from "astro:content";
 import Datetime from "./Datetime.astro";
+import { getPath } from '@/utils/getPath';
 
 export interface Props extends CollectionEntry<"blog"> {
   variant?: "h2" | "h3";
+  datePosition?: "top" | "bottom";
 }
 
-const { variant = "h2", data, id, filePath } = Astro.props;
+const { data, datePosition = "top", id, filePath } = Astro.props;
 
-const { title, description, pubDatetime, modDatetime, timezone } = data;
+const { pubDatetime, modDatetime, timezone } = data;
 
-const headerProps = {
-  style: { viewTransitionName: slugifyStr(title) },
-  class: "text-lg font-medium decoration-dashed hover:underline",
-};
+const { Content } = await render(Astro.props);
+const link = getPath(id, filePath);
 ---
 
-<li class="my-6">
-  <a
-    href={getPath(id, filePath)}
-    class="inline-block text-lg font-medium text-accent decoration-dashed underline-offset-4 focus-visible:no-underline focus-visible:underline-offset-0"
-  >
-    {
-      variant === "h2" ? (
-        <h2 {...headerProps}>{title}</h2>
-      ) : (
-        <h3 {...headerProps}>{title}</h3>
-      )
-    }
-  </a>
-  <Datetime {pubDatetime} {modDatetime} {timezone} />
-  <p>{description}</p>
-</li>
+<div
+  class="post-card app-prose mx-auto mb-6 max-w-app rounded-lg border border-gray-200 bg-white p-6 shadow-md dark:border-gray-700 dark:bg-gray-800 prose-pre:bg-(--shiki-light-bg) dark:prose-pre:bg-(--shiki-dark-bg) break-inside-avoid"
+>
+  {
+    datePosition === "top" && (
+      <Datetime size="lg" {pubDatetime} {modDatetime} {timezone} link={link} />
+    )
+  }
+  <Content />
+  {
+    datePosition === "bottom" && (
+      <Datetime {pubDatetime} {modDatetime} {timezone} link={link} />
+    )
+  }
+</div>
+
+<style>
+  .post-card:first-of-type {
+    margin-top: 0 !important;
+  }
+</style>

@@ -56,7 +56,7 @@ const structuredData = {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="canonical" href={canonicalURL} />
     <meta name="generator" content={Astro.generator} />
 
@@ -132,16 +132,11 @@ const structuredData = {
 
     <script is:inline src="/toggle-theme.js"></script>
   </head>
-  <body>
-    <slot />
+  <body class="px-3">
+    <div
+      class="container relative mx-auto my-6 max-w-screen-lg border-2 border-gray-400 bg-[#fbf8f3] px-4 font-serif text-base leading-relaxed shadow-lg sm:px-6 lg:px-8 dark:border-gray-900 dark:bg-[#212737]"
+    >
+      <slot />
+    </div>
   </body>
 </html>
-
-<style>
-  html,
-  body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-  }
-</style>
