@@ -11,8 +11,6 @@ import {
 import { transformerFileName } from "./src/utils/transformers/fileName";
 import { SITE } from "./src/config";
 
-import cloudflare from "@astrojs/cloudflare";
-
 // https://astro.build/config
 export default defineConfig({
   site: SITE.website,
@@ -48,7 +46,7 @@ export default defineConfig({
     optimizeDeps: {
       exclude: ["@resvg/resvg-js"],
     },
-    ssr: { external: ['node'] },
+    ssr: { external: ['@resvg/resvg-js'] },
   },
 
   image: {
@@ -69,6 +67,4 @@ export default defineConfig({
   experimental: {
     preserveScriptOrder: true,
   },
-
-  adapter: cloudflare(),
 });
