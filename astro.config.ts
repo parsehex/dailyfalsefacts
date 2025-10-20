@@ -48,6 +48,7 @@ export default defineConfig({
     optimizeDeps: {
       exclude: ["@resvg/resvg-js"],
     },
+    ssr: { external: ['node'] },
   },
 
   image: {
