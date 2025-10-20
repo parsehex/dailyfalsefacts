@@ -11,14 +11,14 @@ export default async function loadGoogleFonts() {
 
   const fonts = [
     {
-      name: "IBM Plex Mono",
-      data: loadFont("IBMPlexMono-Regular.ttf"),
+      name: "Merriweather",
+      data: loadFont("Merriweather_24pt-Regular.ttf"),
       weight: 400,
       style: "normal",
     },
     {
-      name: "IBM Plex Mono",
-      data: loadFont("IBMPlexMono-Bold.ttf"),
+      name: "Merriweather",
+      data: loadFont("Merriweather_24pt-Bold.ttf"),
       weight: 700,
       style: "bold",
     },
