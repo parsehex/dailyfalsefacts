@@ -41,7 +41,7 @@ onMounted(loadLies);
 
 <template>
   <div
-    class="lies-ticker relative w-full overflow-hidden border-2 bg-background text-sm font-semibold tracking-wide uppercase shadow-sm"
+    class="lies-ticker left-0 absolute w-full overflow-hidden border-2 bg-background text-sm font-semibold tracking-wide uppercase shadow-sm"
   >
     <div class="absolute top-0 left-0 z-10 bg-red-600 px-3 py-1 text-white">
       Lies
