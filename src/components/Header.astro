@@ -9,7 +9,7 @@ import IconMenuDeep from "@/assets/icons/IconMenuDeep.svg";
 import IconDice from "@/assets/icons/IconDice.svg";
 import LinkButton from "./LinkButton.astro";
 import { SITE } from "@/config";
-import falseFacts from "@/data/old-false-facts.json";
+import Ticker from './Ticker.vue';
 
 const { pathname } = Astro.url;
 
@@ -23,11 +23,6 @@ const isActive = (path: string) => {
 
   return currentPath === path || currentPathArray[0] === pathArray[0];
 };
-
-const randomFacts = Array.from(
-  { length: 16 },
-  () => falseFacts[Math.floor(Math.random() * falseFacts.length)]
-);
 ---
 
 <>
@@ -154,26 +149,10 @@ const randomFacts = Array.from(
       </div>
     </div>
   </header>
-  <div
-    class="bottom--8 absolute left-0 mx-auto w-full overflow-hidden border-2 bg-background text-sm font-semibold tracking-wide uppercase shadow-sm"
-  >
-    <div class="absolute top-0 left-0 z-10 bg-red-600 px-3 py-1 text-white">
-      LIES
-    </div>
-    <div class="animate-marquee py-1 pl-24 whitespace-nowrap">
-      {
-        randomFacts.map((f, i) => (
-          <>
-            {f}
-            {i < randomFacts.length - 1 && <span class="px-4">•</span>}
-          </>
-        ))
-      }
-    </div>
-  </div>
+  <Ticker client:only />
   <br />
   <br />
-</>
+</L>
 
 <script>
   function toggleNav() {

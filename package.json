@@ -15,6 +15,7 @@
   "dependencies": {
     "@astrojs/rss": "^4.0.12",
     "@astrojs/sitemap": "^3.4.1",
+    "@astrojs/vue": "^5.1.1",
     "@resvg/resvg-js": "^2.6.2",
     "@resvg/resvg-wasm": "^2.6.2",
     "@tailwindcss/vite": "^4.1.11",
@@ -25,7 +26,8 @@
     "remark-toc": "^9.0.0",
     "satori": "^0.15.2",
     "sharp": "^0.34.2",
-    "tailwindcss": "^4.1.11"
+    "tailwindcss": "^4.1.11",
+    "vue": "^3.5.22"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",

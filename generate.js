@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import facts from "./src/data/old-false-facts.json" with { type: "json" };
+import facts from "./public/old-false-facts.json" with { type: "json" };
 
 const outDir = path.resolve("src/data/blog/old-false-facts");
 fs.mkdirSync(outDir, { recursive: true });
