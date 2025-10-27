@@ -1,6 +1,25 @@
 import satori from "satori";
 import { SITE } from "@/config";
 import loadGoogleFonts from "../loadGoogleFont";
+import { getLogoDataUri } from "../getLogo";
+
+const descWords = SITE.desc.split(' ');
+const descElements = !SITE.desc.startsWith('Proudly ') ? 
+  SITE.desc :
+  [
+    {
+      type: 'span',
+      props: {
+        children: descWords[0],
+        style: {
+          marginRight: '0.25em',
+          paddingBottom: '0.05em',
+          borderBottom: '2px dashed #dc2626', // red 600
+        },
+      },
+    },
+     descWords.slice(1).join(' '),
+  ];
 
 export default async () => {
   return satori(
@@ -75,11 +94,30 @@ export default async () => {
                         },
                         children: [
                           {
-                            type: "p",
+                            type: 'div',
                             props: {
-                              style: { fontSize: 72, fontWeight: "bold" },
-                              children: SITE.title,
-                            },
+                              style: { display: 'flex', alignItems: 'center' },
+                              children: [
+                                {
+                                  type: 'img',
+                                  props: {
+                                    src: getLogoDataUri(),
+                                    style: {
+                                      marginRight: '1.5em',
+                                      maxWidth: '5em',
+                                      maxHeight: '5em',
+                                    }
+                                  }
+                                },
+                                {
+                                  type: "p",
+                                  props: {
+                                    style: { fontSize: 72, fontWeight: "bold" },
+                                    children: SITE.title,
+                                  },
+                                },
+                              ]
+                            }
                           },
                           {
                             type: "p",
@@ -87,7 +125,7 @@ export default async () => {
                               style: { 
                                 fontSize: 28,
                               },
-                              children: SITE.desc,
+                              children: descElements,
                             },
                           },
                         ],

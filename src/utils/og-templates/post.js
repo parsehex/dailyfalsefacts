@@ -4,13 +4,7 @@ import loadGoogleFonts from "../loadGoogleFont";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
-
-import fs from "fs";
-import path from "path";
-
-const logoPath = path.resolve("./public/logo-150px.png");
-const logoBase64 = fs.readFileSync(logoPath, { encoding: "base64" });
-const logoDataUri = `data:image/png;base64,${logoBase64}`;
+import { getLogoDataUri } from "../getLogo";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -102,7 +96,7 @@ export default async post => {
                           {
                             type: 'img',
                             props: {
-                              src: logoDataUri,
+                              src: getLogoDataUri(),
                               style: {
                                 marginRight: '0.25em',
                                 maxWidth: '1em',
